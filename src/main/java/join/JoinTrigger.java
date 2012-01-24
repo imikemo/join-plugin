@@ -328,7 +328,13 @@ public class JoinTrigger extends Recorder implements DependecyDeclarer, MatrixAg
             if (copyArchiver != null) {
                 list.add(Hudson.getInstance().getDescriptorByType(com.thalesgroup.hudson.plugins.copyarchiver.CopyArchiverPublisher.CopyArchiverDescriptor.class));
             }
-            // See issue 4384.  Supporting the mailer here breaks its use as the regular post-build action.
+            // EngTools Status Updater
+            Plugin engTools = Hudson.getInstance().getPlugin("engtools");
+            if (engTools != null) {
+                list.add(Hudson.getInstance().getDescriptorByType(com.cisco.hudson.plugins.EngToolsStatusUpdater.DescriptorImpl.class));
+            }
+
+	    // See issue 4384.  Supporting the mailer here breaks its use as the regular post-build action.
             //list.add(Hudson.getInstance().getDescriptorByType(hudson.tasks.Mailer.DescriptorImpl.class));
             return list;
         }
